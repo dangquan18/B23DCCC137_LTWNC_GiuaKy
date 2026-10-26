@@ -44,13 +44,20 @@ export default function StatsPage() {
         </div>
       </div>
 
+
       <div className="stats-card">
-        <h2 className="stats-card__title">Số đầu sách theo thể loại</h2>
+        <div className="stats-card__head">
+          <h2 className="stats-card__title">Số đầu sách theo thể loại</h2>
+          <span className="stats-card__badge">{CATEGORIES.length} chuyên mục</span>
+        </div>
         <ul className="stats-list">
           {CATEGORIES.map((category) => (
             <li key={category} className="stats-row" data-category={category}>
               <div className="stats-row__head">
-                <span className="stats-row__name">{category}</span>
+                <span className="stats-row__name">
+                  <span className="stats-row__dot" aria-hidden="true" />
+                  {category}
+                </span>
                 <span className="stats-row__meta">
                   {counts[category]} đầu sách · {available[category]} bản còn lại
                 </span>
@@ -66,5 +73,6 @@ export default function StatsPage() {
         </ul>
       </div>
     </section>
+
   );
 }

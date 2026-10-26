@@ -10,6 +10,8 @@ export default function SearchBar() {
     [setKeyword],
   );
 
+  const handleClear = useCallback(() => setKeyword(''), [setKeyword]);
+
   return (
     <div className="search">
       <svg className="search__icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
@@ -24,6 +26,18 @@ export default function SearchBar() {
         value={keyword}
         onChange={handleChange}
       />
+      {keyword.length > 0 && (
+        <button
+          type="button"
+          className="search__clear"
+          onClick={handleClear}
+          aria-label="Xóa tìm kiếm"
+          title="Xóa tìm kiếm"
+        >
+          ✕
+        </button>
+      )}
     </div>
   );
 }
+

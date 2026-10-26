@@ -12,7 +12,9 @@ export interface Book extends HasId {
   category: Category;
   year: number;
   available: number;
+  cover?: string;
 }
+
 
 export type CategoryFilter = Category | 'ALL';
 

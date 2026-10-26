@@ -41,6 +41,8 @@ function CategorySection({ category, books, borrowedIds, onBorrow, onReturn }: C
         </div>
       </div>
 
+
+
       <ul className="book-row" ref={rowRef}>
         {books.map((book) => (
           <BookItem

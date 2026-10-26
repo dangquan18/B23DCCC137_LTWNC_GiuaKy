@@ -16,6 +16,28 @@ function BookItem({ book, isBorrowed, onBorrow, onReturn }: BookItemProps) {
 
   return (
     <li className={isBorrowed ? 'book-card book-card--borrowed' : 'book-card'} data-category={book.category}>
+      <div className="book-card__cover" aria-hidden="true">
+        {book.cover && (
+          <img
+            src={book.cover}
+            alt=""
+            className="book-card__cover-img"
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        )}
+        <div className="book-card__cover-overlay" />
+        <span className="book-card__cover-year">{book.year}</span>
+        {isBorrowed && <span className="book-card__badge book-card__badge--borrowed">Đang mượn</span>}
+        {!isBorrowed && outOfStock && <span className="book-card__badge book-card__badge--out">Hết sách</span>}
+        {!isBorrowed && !outOfStock && book.available === 1 && (
+          <span className="book-card__badge book-card__badge--low">Chỉ còn 1</span>
+        )}
+      </div>
+
+
       <div className="book-card__body">
         <span className="book-card__tag">
           {book.category} · {book.year}
@@ -25,9 +47,17 @@ function BookItem({ book, isBorrowed, onBorrow, onReturn }: BookItemProps) {
       </div>
 
       <div className="book-card__footer">
-        <span className={outOfStock ? 'book-card__stock book-card__stock--empty' : 'book-card__stock'}>
-          {outOfStock ? 'Hết bản' : `Còn ${book.available} bản`}
-        </span>
+        <div className="book-card__stock-wrap">
+          <span
+            className={`book-card__stock-dot ${
+              outOfStock ? 'is-empty' : book.available === 1 ? 'is-low' : 'is-good'
+            }`}
+            aria-hidden="true"
+          />
+          <span className={outOfStock ? 'book-card__stock book-card__stock--empty' : 'book-card__stock'}>
+            {outOfStock ? 'Hết bản' : `Còn ${book.available} bản`}
+          </span>
+        </div>
         {isBorrowed ? (
           <button type="button" className="pill-btn pill-btn--outline" onClick={handleReturn}>
             Trả

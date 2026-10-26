@@ -20,8 +20,14 @@ function BookList({ books, borrowedIds, onBorrow, onReturn }: BookListProps) {
   );
 
   if (groups.length === 0) {
-    return <p className="status">Không tìm thấy sách phù hợp.</p>;
+    return (
+      <div className="empty-state">
+        <p className="status">Không tìm thấy sách phù hợp.</p>
+        <p className="empty-state__hint">Hãy thử đổi từ khóa tìm kiếm hoặc chọn lại thể loại khác.</p>
+      </div>
+    );
   }
+
 
   return (
     <div className="book-sections">
@@ -40,3 +46,4 @@ function BookList({ books, borrowedIds, onBorrow, onReturn }: BookListProps) {
 }
 
 export default memo(BookList);
+

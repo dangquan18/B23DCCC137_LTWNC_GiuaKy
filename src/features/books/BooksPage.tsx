@@ -50,7 +50,27 @@ export default function BooksPage() {
         <CategoryFilterBar />
       </div>
 
-      {(status === 'idle' || status === 'loading') && <p className="status">Đang tải...</p>}
+      {(status === 'idle' || status === 'loading') && (
+        <div className="loading-state">
+          <p className="status">Đang tải...</p>
+          <div className="skeleton-grid" aria-hidden="true">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="skeleton-card">
+                <div className="skeleton-card__cover shimmer" />
+                <div className="skeleton-card__body">
+                  <div className="skeleton-card__tag shimmer" />
+                  <div className="skeleton-card__title shimmer" />
+                  <div className="skeleton-card__author shimmer" />
+                </div>
+                <div className="skeleton-card__footer">
+                  <div className="skeleton-card__stock shimmer" />
+                  <div className="skeleton-card__btn shimmer" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {status === 'failed' && (
         <div className="alert alert--error" role="alert">
@@ -67,3 +87,4 @@ export default function BooksPage() {
     </div>
   );
 }
+

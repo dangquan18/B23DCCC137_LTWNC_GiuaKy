@@ -26,7 +26,7 @@ export default function BorrowedDock() {
     <div className="dock-wrap">
       {warning && (
         <div className="toast" role="alert">
-          <span>{warning}</span>
+          <span className="toast__text">{warning}</span>
           <button type="button" className="toast__close" onClick={handleDismiss} aria-label="Đóng cảnh báo">
             ×
           </button>
@@ -40,6 +40,7 @@ export default function BorrowedDock() {
             <span key={slot} className={index < borrowedBooks.length ? 'dock__dot dock__dot--on' : 'dock__dot'} />
           ))}
         </span>
+
         {borrowedBooks.length === 0 ? (
           <span className="dock__empty">Bạn chưa mượn cuốn nào.</span>
         ) : (
@@ -51,5 +52,6 @@ export default function BorrowedDock() {
         )}
       </aside>
     </div>
+
   );
 }
